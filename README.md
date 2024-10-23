@@ -1,10 +1,10 @@
-## export-env
+## export-env-action
 
 GitHub Secret에 여러 환경 변수를 **단 하나의 파일**로 등록해 사용할 수 있습니다.
 
 ### 사용 예시
 
-- Github Secret
+- **Github Secret** : ENV_FILE_CONTENT
 
 ```yml
 DB_USERNAME=myuser
@@ -16,15 +16,12 @@ API_KEY=myapikey
 
 ```yml
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Set environment variables from secret
-        uses: miensoap/export-env@v1.0.0
+        uses: Miensoap/extract-env-action@v0.0.3
         with:
           env_file_content: ${{ secrets.ENV_FILE_CONTENT }}
 
@@ -32,3 +29,8 @@ jobs:
         run: |
           echo "DB_USERNAME is $DB_USERNAME"
 ```
+
+### 테스트 결과
+
+![image](https://github.com/user-attachments/assets/6b1a1419-83ee-483f-a745-f48d35d8dd8d)
+
